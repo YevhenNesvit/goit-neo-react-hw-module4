@@ -1,0 +1,8 @@
+.galleryContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 колонки однакової ширини */
+  gap: 16px; /* Проміжок між зображеннями */
+  padding: 16px; /* Внутрішні відступи */
+  list-style-type: none; /* Вимкнення маркерів списку */
+  margin: 0; /* Зменшення зовнішніх відступів */
+}

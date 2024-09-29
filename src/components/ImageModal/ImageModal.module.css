@@ -1,0 +1,8 @@
+.ReactModal__Overlay {
+    background: rgba(0, 0, 0, 0.75);
+  }
+  
+  .ReactModal__Content {
+    max-width: 800px;
+    margin: auto;
+  }
