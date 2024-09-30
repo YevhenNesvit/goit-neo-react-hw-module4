@@ -65,8 +65,8 @@ const App = () => {
 
   return (
     <div className={styles.app}>
-      <SearchBar onSubmit={handleSearchSubmit} />
-      {error && <ErrorMessage />}
+      <SearchBar onSubmit={handleSearchSubmit} setError={setError} />
+      {error && <ErrorMessage message={error} />}
       <ImageGallery images={images} onImageClick={handleImageClick} />
       {loading && <Loader />}
       {images.length > 0 && !loading && (
