@@ -4,7 +4,7 @@ const ImageModal = ({ isOpen, onRequestClose, image }) => {
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={onRequestClose}
+      onRequestClose={onRequestClose} // Закриває модальне вікно при натисканні за межами
       ariaHideApp={false}
       style={{
         overlay: {

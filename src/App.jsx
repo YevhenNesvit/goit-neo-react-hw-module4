@@ -14,27 +14,32 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null); // This will store the selected image for the modal
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     if (!query) return;
 
     const fetchImages = async () => {
       setLoading(true);
-      const response = await axios.get(
-        `https://api.unsplash.com/search/photos`,
-        {
-          params: {
-            query,
-            page,
-            per_page: 12,
-            client_id: "IOSomVG1XQbYOHUXK4cpam1ynLzZW16kpz6BjJvANMQ", // Replace with your access key
-          },
-        }
-      );
-      setImages((prevImages) => [...prevImages, ...response.data.results]);
-      setError(null);
-      setLoading(false);
+      try {
+        const response = await axios.get(
+          `https://api.unsplash.com/search/photos`,
+          {
+            params: {
+              query,
+              page,
+              per_page: 12,
+              client_id: "IOSomVG1XQbYOHUXK4cpam1ynLzZW16kpz6BjJvANMQ",
+            },
+          }
+        );
+        setImages((prevImages) => [...prevImages, ...response.data.results]);
+        setError(null);
+      } catch {
+        setError("Error fetching images");
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchImages();
@@ -68,7 +73,11 @@ const App = () => {
         <LoadMoreBtn onClick={handleLoadMore} />
       )}
       {selectedImage && (
-        <ImageModal image={selectedImage} onClose={closeModal} />
+        <ImageModal
+          isOpen={!!selectedImage}
+          onRequestClose={closeModal}
+          image={selectedImage}
+        />
       )}
     </div>
   );
