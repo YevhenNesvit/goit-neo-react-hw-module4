@@ -33,8 +33,13 @@ const App = () => {
             },
           }
         );
-        setImages((prevImages) => [...prevImages, ...response.data.results]);
-        setError(null);
+
+        if (response.data.results.length > 0) {
+          setImages((prevImages) => [...prevImages, ...response.data.results]);
+          setError(null); // Очищаємо помилку лише якщо є результати
+        } else if (page === 1) {
+          setError("No results found. Please try a different search term.");
+        }
       } catch {
         setError("Error fetching images");
       } finally {
@@ -46,9 +51,12 @@ const App = () => {
   }, [query, page]);
 
   const handleSearchSubmit = (searchQuery) => {
-    setQuery(searchQuery);
-    setImages([]);
-    setPage(1);
+    if (searchQuery !== query) {
+      setQuery(searchQuery);
+      setImages([]);
+      setPage(1);
+      setError(null); // Очищення помилки перед новим пошуком
+    }
   };
 
   const handleLoadMore = () => {

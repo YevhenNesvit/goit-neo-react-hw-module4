@@ -26,8 +26,6 @@ const SearchBar = ({ onSubmit, setError }) => {
       return;
     }
 
-    setError(""); // Скидання помилки, якщо запит валідний
-
     try {
       const results = await onSubmit(query);
       if (!results || results.length === 0) {
